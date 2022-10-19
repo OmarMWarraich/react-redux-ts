@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useLaunchListQuery } from "../../generated/graphql.tsx/graphql";
 import LaunchList from "./LaunchList";
 
