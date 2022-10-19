@@ -1,6 +1,6 @@
 overwrite: true
 schema: " https://spacexdata.herokuapp.com/graphql"
-documents: "./src/components/**/*.{ts,tsx}"
+documents: "./src/features/**/*.{ts,tsx}"
 generates:
   src/generated/graphql.tsx:
     preset: "client"
@@ -8,7 +8,6 @@ generates:
       - "typescript"
       - "typescript-operations"
       - "typescript-react-apollo"
-      - "typescript-graphql-files-modules"
     config:
       withHooks: true
       withHOC: false
