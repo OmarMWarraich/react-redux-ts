@@ -4,4 +4,12 @@ documents: "./src/components/**/*.{ts,tsx}"
 generates:
   src/generated/graphql.tsx:
     preset: "client"
-    plugins: []
+    plugins: 
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+      - "typescript-graphql-files-modules"
+    config:
+      withHooks: true
+      withHOC: false
+      withComponent: false
