@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-export const LAUNCH_LIST_QUERY = gql`
-    query LaunchListQuery {
+export const LAUNCH_LIST = gql`
+    query LaunchList {
         launches {
             mission_name
             launch_date_local

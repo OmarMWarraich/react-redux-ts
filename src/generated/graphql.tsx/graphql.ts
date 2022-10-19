@@ -738,13 +738,21 @@ export type TrunkCargo = {
   unpressurized_cargo?: Maybe<Scalars['Boolean']>;
 };
 
-export type LaunchListQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type LaunchListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LaunchListQueryQuery = { __typename?: 'Query', launches?: Array<{ __typename?: 'Launch', mission_name?: string | null, launch_date_local?: string | null, launch_success?: boolean | null } | null> | null };
+export type LaunchListQuery = { __typename?: 'Query', launches?: Array<{ __typename?: 'Launch', mission_name?: string | null, launch_date_local?: string | null, launch_success?: boolean | null } | null> | null };
+
+export type LaunchProfileQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
 
 
-export const LaunchListQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LaunchListQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"launches"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mission_name"}},{"kind":"Field","name":{"kind":"Name","value":"launch_date_local"}},{"kind":"Field","name":{"kind":"Name","value":"launch_success"}}]}}]}}]} as unknown as DocumentNode<LaunchListQueryQuery, LaunchListQueryQueryVariables>;
+export type LaunchProfileQuery = { __typename?: 'Query', launch?: { __typename?: 'Launch', flight_number?: number | null, mission_name?: string | null, launch_year?: number | null, launch_success?: boolean | null, launch_date_local?: string | null, details?: string | null, launch_site?: { __typename?: 'LaunchSite', site_name_long?: string | null } | null, rocket?: { __typename?: 'LaunchRocket', rocket_id?: string | null, rocket_name?: string | null, rocket_type?: string | null } | null, links?: { __typename?: 'LaunchLinks', mission_patch_small?: string | null, flickr_images?: Array<string | null> | null } | null } | null };
+
+
+export const LaunchListDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LaunchList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"launches"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mission_name"}},{"kind":"Field","name":{"kind":"Name","value":"launch_date_local"}},{"kind":"Field","name":{"kind":"Name","value":"launch_success"}}]}}]}}]} as unknown as DocumentNode<LaunchListQuery, LaunchListQueryVariables>;
+export const LaunchProfileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LaunchProfile"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"launch"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"flight_number"}},{"kind":"Field","name":{"kind":"Name","value":"mission_name"}},{"kind":"Field","name":{"kind":"Name","value":"launch_year"}},{"kind":"Field","name":{"kind":"Name","value":"launch_success"}},{"kind":"Field","name":{"kind":"Name","value":"launch_date_local"}},{"kind":"Field","name":{"kind":"Name","value":"details"}},{"kind":"Field","name":{"kind":"Name","value":"launch_site"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"site_name_long"}}]}},{"kind":"Field","name":{"kind":"Name","value":"rocket"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rocket_id"}},{"kind":"Field","name":{"kind":"Name","value":"rocket_name"}},{"kind":"Field","name":{"kind":"Name","value":"rocket_type"}}]}},{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mission_patch_small"}},{"kind":"Field","name":{"kind":"Name","value":"flickr_images"}}]}}]}}]}}]} as unknown as DocumentNode<LaunchProfileQuery, LaunchProfileQueryVariables>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -1475,14 +1483,21 @@ export type TrunkCargo = {
   unpressurized_cargo?: Maybe<Scalars['Boolean']>;
 };
 
-export type LaunchListQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type LaunchListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LaunchListQueryQuery = { __typename?: 'Query', launches?: Array<{ __typename?: 'Launch', mission_name?: string | null, launch_date_local?: string | null, launch_success?: boolean | null } | null> | null };
+export type LaunchListQuery = { __typename?: 'Query', launches?: Array<{ __typename?: 'Launch', mission_name?: string | null, launch_date_local?: string | null, launch_success?: boolean | null } | null> | null };
+
+export type LaunchProfileQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
 
 
-export const LaunchListQueryDocument = gql`
-    query LaunchListQuery {
+export type LaunchProfileQuery = { __typename?: 'Query', launch?: { __typename?: 'Launch', flight_number?: number | null, mission_name?: string | null, launch_year?: number | null, launch_success?: boolean | null, launch_date_local?: string | null, details?: string | null, launch_site?: { __typename?: 'LaunchSite', site_name_long?: string | null } | null, rocket?: { __typename?: 'LaunchRocket', rocket_id?: string | null, rocket_name?: string | null, rocket_type?: string | null } | null, links?: { __typename?: 'LaunchLinks', mission_patch_small?: string | null, flickr_images?: Array<string | null> | null } | null } | null };
+
+
+export const LaunchListDocument = gql`
+    query LaunchList {
   launches {
     mission_name
     launch_date_local
@@ -1492,28 +1507,80 @@ export const LaunchListQueryDocument = gql`
     `;
 
 /**
- * __useLaunchListQueryQuery__
+ * __useLaunchListQuery__
  *
- * To run a query within a React component, call `useLaunchListQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `useLaunchListQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useLaunchListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLaunchListQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useLaunchListQueryQuery({
+ * const { data, loading, error } = useLaunchListQuery({
  *   variables: {
  *   },
  * });
  */
-export function useLaunchListQueryQuery(baseOptions?: Apollo.QueryHookOptions<LaunchListQueryQuery, LaunchListQueryQueryVariables>) {
+export function useLaunchListQuery(baseOptions?: Apollo.QueryHookOptions<LaunchListQuery, LaunchListQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<LaunchListQueryQuery, LaunchListQueryQueryVariables>(LaunchListQueryDocument, options);
+        return Apollo.useQuery<LaunchListQuery, LaunchListQueryVariables>(LaunchListDocument, options);
       }
-export function useLaunchListQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LaunchListQueryQuery, LaunchListQueryQueryVariables>) {
+export function useLaunchListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LaunchListQuery, LaunchListQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<LaunchListQueryQuery, LaunchListQueryQueryVariables>(LaunchListQueryDocument, options);
+          return Apollo.useLazyQuery<LaunchListQuery, LaunchListQueryVariables>(LaunchListDocument, options);
         }
-export type LaunchListQueryQueryHookResult = ReturnType<typeof useLaunchListQueryQuery>;
-export type LaunchListQueryLazyQueryHookResult = ReturnType<typeof useLaunchListQueryLazyQuery>;
-export type LaunchListQueryQueryResult = Apollo.QueryResult<LaunchListQueryQuery, LaunchListQueryQueryVariables>;
+export type LaunchListQueryHookResult = ReturnType<typeof useLaunchListQuery>;
+export type LaunchListLazyQueryHookResult = ReturnType<typeof useLaunchListLazyQuery>;
+export type LaunchListQueryResult = Apollo.QueryResult<LaunchListQuery, LaunchListQueryVariables>;
+export const LaunchProfileDocument = gql`
+    query LaunchProfile($id: String!) {
+  launch(id: $id) {
+    flight_number
+    mission_name
+    launch_year
+    launch_success
+    launch_date_local
+    details
+    launch_site {
+      site_name_long
+    }
+    rocket {
+      rocket_id
+      rocket_name
+      rocket_type
+    }
+    links {
+      mission_patch_small
+      flickr_images
+    }
+  }
+}
+    `;
+
+/**
+ * __useLaunchProfileQuery__
+ *
+ * To run a query within a React component, call `useLaunchProfileQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLaunchProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLaunchProfileQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useLaunchProfileQuery(baseOptions: Apollo.QueryHookOptions<LaunchProfileQuery, LaunchProfileQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<LaunchProfileQuery, LaunchProfileQueryVariables>(LaunchProfileDocument, options);
+      }
+export function useLaunchProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LaunchProfileQuery, LaunchProfileQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<LaunchProfileQuery, LaunchProfileQueryVariables>(LaunchProfileDocument, options);
+        }
+export type LaunchProfileQueryHookResult = ReturnType<typeof useLaunchProfileQuery>;
+export type LaunchProfileLazyQueryHookResult = ReturnType<typeof useLaunchProfileLazyQuery>;
+export type LaunchProfileQueryResult = Apollo.QueryResult<LaunchProfileQuery, LaunchProfileQueryVariables>;
