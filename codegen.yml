@@ -1,0 +1,7 @@
+overwrite: true
+schema: " https://spacexdata.herokuapp.com/graphql"
+documents: "./src/components/**/*.{ts,tsx}"
+generates:
+  src/generated/graphql.tsx:
+    preset: "client"
+    plugins: []
